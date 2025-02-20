@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://bsh236ponljit"]
+
+[ext_resource type="Script" path="res://Scene/pipe.gd" id="1_vlyue"]
+[ext_resource type="Texture2D" uid="uid://buogpwi28hnc8" path="res://Asset/pipe.png" id="2_0vv6i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4dd25"]
+size = Vector2(78, 35)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s6jbr"]
+size = Vector2(72.5, 524)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6pyx5"]
+size = Vector2(78, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_32lan"]
+size = Vector2(72, 524)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nkniv"]
+size = Vector2(64, 151)
+
+[node name="Pipe" type="Area2D" groups=["pipes"]]
+script = ExtResource("1_vlyue")
+
+[node name="Upper" type="Sprite2D" parent="."]
+position = Vector2(0, 25)
+texture = ExtResource("2_0vv6i")
+offset = Vector2(0, -380)
+flip_v = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -93.5)
+shape = SubResource("RectangleShape2D_4dd25")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-0.25, -373)
+shape = SubResource("RectangleShape2D_s6jbr")
+
+[node name="Lower" type="Sprite2D" parent="."]
+position = Vector2(0, -25)
+texture = ExtResource("2_0vv6i")
+offset = Vector2(0, 380)
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(0, 93)
+shape = SubResource("RectangleShape2D_6pyx5")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+position = Vector2(0, 373)
+shape = SubResource("RectangleShape2D_32lan")
+
+[node name="ScoreArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreArea"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_nkniv")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="ScoreArea" to="." method="_on_score_area_body_entered"]
